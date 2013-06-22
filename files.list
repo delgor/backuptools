@@ -1,0 +1,11 @@
++ /home
++ /etc
+- /var/www/clients/client*/web*/tmp
++ /var/www
++ /var/mail
++ /var/backup
+- /dev
+- /tmp
+- /usr
+- **/*
+

@@ -1,0 +1,20 @@
+== Overview ==
+These are just some little scripts I use for backing up stuff. Feel free to modify them according to your needs. Used software: duplicity, rsync
+
+== Files ==
+* .backup.conf: General configuration - this one has to be in your home directory.
+* backup_databases.sh: Generate Database Backups - copied almost verbatim from http://wiki.ubuntuusers.de/MySQL/Backup
+* backup_files.sh: Generates full/incremental backups using duplicity, symmetrically encrypted by GnuPG using the given passphrase.
+* transfer.sh: Simple rsync wrapper used to copy the generated backup to another directory. 
+* upload.sh: Uses transfer.sh to really get the backup somewhere. In my case, thats mounting a remote fs, transfer.sh, unmounting.
+* backup_complete.sh: Do everything at once. Generates the database and file backup, then uploads them.
+* files.list: List of files to include/exclude in the backup. See the duplicity man page for details.
+* mysql.conf: Login data for the mysqld. Needs global SELECT access, SHOW DATABASES and probably LOCK TABLES permissions.
+
+.backup.conf belongs in your home directory, everything else goes into the path specified by BACKUP_BASEDIR in .backup.conf. Backups are stored in the path specified by BACKUP_TARGET.
+
+== Known Issues ==
+* Database backups are currently MySQL-only, settings are hardcoded.
+* There is no option for disabling the database backup in backup_complete.sh.
+* There is no option to automatically generate new full backups (instead of incremental ones) every X days.
+
